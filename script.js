@@ -3,6 +3,7 @@ var h1 = document.querySelector('h1');
 var startBttn = document.getElementById('start-button');
 var h2 = document.querySelector('h2');
 var answers = document.getElementById('answers');
+var endHeader = document.getElementById('end-header');
 
 timer = 60;
 score = 0;
@@ -22,11 +23,11 @@ var questions_with_answers = [
         correct: 'optionB'
     },
     {
-        q: 'How Stinky is my hammy?',
-        optionA: 'A. very',
-        optionB: 'B. a little bit',
-        optionC: 'C. not at all',
-        optionD: 'D. a cubic fuck ton',
+        q: 'What color is the sky?',
+        optionA: 'A. red',
+        optionB: 'B. green',
+        optionC: 'C. yellow',
+        optionD: 'D. blue',
         correct: 'optionD'
     },
     {
@@ -55,6 +56,11 @@ var questions_with_answers = [
     }
 ];
 
+var optionA = document.getElementById('option-a');
+var optionB = document.getElementById('option-b');
+var optionC = document.getElementById('option-c');
+var optionD = document.getElementById('option-d');
+
 
 // Starts Quiz
 function startQuiz() {
@@ -62,31 +68,9 @@ function startQuiz() {
     document.getElementById('answers').style.display = 'block';
     
     displayQuestion(0);
-    quizFinish();
 
 }
 
-// Checks Answer & logs -1 or +1 for score
-function checkAnswer(userAnswer) {
-    if (userAnswer === currentQ.correct) {
-        score++
-        document.getElementById('verify').innerHTML = "Correct!";
-    }
-    else {
-        score--
-        document.getElementById('verify').innerHTML = "Wrong! Correct answer: " + currentQ[currentQ.correct];
-    }
-    index++;
-    displayQuestion(index);
-    return;
-
-}
-
-
-var optionA = document.getElementById('option-a');
-var optionB = document.getElementById('option-b');
-var optionC = document.getElementById('option-c');
-var optionD = document.getElementById('option-d');
 
 // event listeners for each of the answer buttons
 optionA.addEventListener('click', function(event) {
@@ -102,6 +86,7 @@ optionD.addEventListener('click', function(event) {
     checkAnswer('optionD');
 });
 
+
 // Displays question and answers on html
 function displayQuestion(index) {
     currentQ = questions_with_answers[index];
@@ -112,12 +97,38 @@ function displayQuestion(index) {
     optionD.innerHTML = currentQ.optionD;
 }
 
+
+// Checks Answer & logs -1 or +1 for score
+function checkAnswer(userAnswer) {
+    if (index > 3) {
+        quizFinish();
+    }
+    console.log('morgan');
+    if (userAnswer === currentQ.correct) {
+        score++
+        document.getElementById('verify').innerHTML = "Correct!";
+    }
+    else {
+        score--
+        document.getElementById('verify').innerHTML = "Wrong! Correct answer: " + currentQ[currentQ.correct];
+    }
+    index++;
+    displayQuestion(index);
+    return;
+
+}
+
+// Display final score and input for initials
 function quizFinish() {
-    h1.textContent = 'All Done!';
+    document.getElementById('end-page').style.display = 'block';
+    document.getElementById('answers').style.display = 'none';
+    document.getElementById('question-prompts').style.display = 'none';
+    document.getElementById('verify').style.display = 'none';
+    endHeader.textContent = 'All Done!';
     var finalScore = document.createElement('p');
     finalScore.textContent = 'Your final score is ' + score;
-    h1.appendChild(finalScore);
-    var userInitials = document.createElement('input');
-    h1.appendChild(userInitials);
+    endHeader.appendChild(finalScore);
+    // var userInitials = document.createElement('input');
+    // endHeader.appendChild(userInitials);
 
 }
