@@ -1,11 +1,14 @@
 h1 {
     text-align: center;
+    margin-top: 100px;
 }
 
 p {
     text-align: center;
 }
 
-.start-button {
+#start-button {
     text-align: center;
+    background-color: rgb(54, 189, 54);
+    align-content: center;
 }

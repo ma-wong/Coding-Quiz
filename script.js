@@ -30,12 +30,12 @@ var questions_with_answers = [
         correct: 'optionD'
     },
     {
-        q: 'Where is javascript?',
-        optionA: 'a',
-        optionB: 'b',
-        optionC: 'c',
-        optionD: 'd',
-        correct: 'a'
+        q: 'Which of the following is not a Javascript type?',
+        optionA: 'result',
+        optionB: 'string',
+        optionC: 'nan',
+        optionD: 'array',
+        correct: 'optionA'
     },
     {
         q: 'When is javascript?',
@@ -43,7 +43,7 @@ var questions_with_answers = [
         optionB: 'b',
         optionC: 'c',
         optionD: 'd',
-        correct: 'a'
+        correct: 'optionA'
     },
     {
         q: 'Why is javascript?',
@@ -51,7 +51,7 @@ var questions_with_answers = [
         optionB: 'b',
         optionC: 'c',
         optionD: 'd',
-        correct: 'c'
+        correct: 'optionC'
     }
 ];
 
@@ -62,6 +62,7 @@ function startQuiz() {
     document.getElementById('answers').style.display = 'block';
     
     displayQuestion(0);
+    quizFinish();
 
 }
 
@@ -77,6 +78,8 @@ function checkAnswer(userAnswer) {
     }
     index++;
     displayQuestion(index);
+    return;
+
 }
 
 
@@ -84,7 +87,6 @@ var optionA = document.getElementById('option-a');
 var optionB = document.getElementById('option-b');
 var optionC = document.getElementById('option-c');
 var optionD = document.getElementById('option-d');
-
 
 optionA.addEventListener('click', function(event) {
     checkAnswer('optionA');
@@ -99,6 +101,7 @@ optionD.addEventListener('click', function(event) {
     checkAnswer('optionD');
 });
 
+
 function displayQuestion(index) {
     currentQ = questions_with_answers[index];
     h2.innerHTML = currentQ.q;
@@ -108,3 +111,12 @@ function displayQuestion(index) {
     optionD.innerHTML = currentQ.optionD;
 }
 
+function quizFinish() {
+    h1.textContent = 'All Done!';
+    var finalScore = document.createElement('p');
+    finalScore.textContent = 'Your final score is ' + score;
+    h1.appendChild(finalScore);
+    var userInitials = document.createElement('input');
+    h1.appendChild(userInitials);
+
+}
