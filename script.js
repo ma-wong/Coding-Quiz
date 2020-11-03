@@ -14,12 +14,12 @@ document.getElementById('answers').style.display = 'none';
 // questions object is array of questions
 var questions_with_answers = [
     {
-        q: 'Who is javascript?',
-        optionA: 'a',
-        optionB: 'b',
-        optionC: 'c',
-        optionD: 'd',
-        correct: 'b'
+        q: 'What is the best animal?',
+        optionA: 'cat',
+        optionB: 'cow',
+        optionC: 'donkey',
+        optionD: 'whale',
+        correct: 'optionB'
     },
     {
         q: 'What is javascript?',
@@ -61,34 +61,16 @@ var currentQ = {};
 // Starts Quiz
 function startQuiz() {
     document.getElementById('start-page').style.display = 'none';
-    var optionA = document.getElementById('option-a');
-    var optionB = document.getElementById('option-b');
-    var optionC = document.getElementById('option-c');
-    var optionD = document.getElementById('option-d');
 
-    optionA.addEventListener('event', function(event) {
-        checkAnswer('a');
-        console.log(currentQ.correct);
-    });
-    optionB.addEventListener('event', function(event) {
-        checkAnswer('b');
-    });
-    optionC.addEventListener('event', function(event) {
-        checkAnswer('c');
-    });
-    optionD.addEventListener('event', function(event) {
-        checkAnswer('d');
-    });
-    
-
-    for (var i = 0; i < questions_with_answers.length; i++) {
-        currentQ = questions_with_answers[i];
+    // for (var i = 0; i < questions_with_answers.length; i++) {
+        currentQ = questions_with_answers[0];
         h2.innerHTML = currentQ.q;
         optionA.innerHTML = currentQ.optionA;
         optionB.innerHTML = currentQ.optionB;
         optionC.innerHTML = currentQ.optionC;
         optionD.innerHTML = currentQ.optionD;
-    }
+    // }
+    
 
     document.getElementById('answers').style.display = 'block';
 
@@ -102,9 +84,30 @@ function checkAnswer(userAnswer) {
     }
     else {
         score--
-        document.getElementById('verify').innerHTML = "Wrong! Correct answer: x";
+        document.getElementById('verify').innerHTML = "Wrong! Correct answer: " + currentQ[currentQ.correct];
     }
     console.log(currentQ.correct);
 }
+
+
+var optionA = document.getElementById('option-a');
+var optionB = document.getElementById('option-b');
+var optionC = document.getElementById('option-c');
+var optionD = document.getElementById('option-d');
+
+
+optionA.addEventListener('click', function(event) {
+    checkAnswer('optionA');
+    console.log(currentQ.correct);
+});
+optionB.addEventListener('click', function(event) {
+    checkAnswer('optionB');
+});
+optionC.addEventListener('click', function(event) {
+    checkAnswer('optionC');
+});
+optionD.addEventListener('click', function(event) {
+    checkAnswer('optionD');
+});
 
 
