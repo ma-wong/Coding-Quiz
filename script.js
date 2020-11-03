@@ -6,7 +6,7 @@ var answers = document.getElementById('answers');
 
 timer = 60;
 score = 0;
-
+index = 0;
 
 startBttn.addEventListener('click', startQuiz);
 document.getElementById('answers').style.display = 'none';
@@ -22,12 +22,12 @@ var questions_with_answers = [
         correct: 'optionB'
     },
     {
-        q: 'What is javascript?',
-        optionA: 'a',
-        optionB: 'b',
-        optionC: 'c',
-        optionD: 'd',
-        correct: 'd'
+        q: 'How Stinky is my hammy?',
+        optionA: 'very',
+        optionB: 'a little bit',
+        optionC: 'not at all',
+        optionD: 'a cubic fuck ton',
+        correct: 'optionD'
     },
     {
         q: 'Where is javascript?',
@@ -56,23 +56,12 @@ var questions_with_answers = [
 ];
 
 
-var currentQ = {};
-
 // Starts Quiz
 function startQuiz() {
     document.getElementById('start-page').style.display = 'none';
-
-    // for (var i = 0; i < questions_with_answers.length; i++) {
-        currentQ = questions_with_answers[0];
-        h2.innerHTML = currentQ.q;
-        optionA.innerHTML = currentQ.optionA;
-        optionB.innerHTML = currentQ.optionB;
-        optionC.innerHTML = currentQ.optionC;
-        optionD.innerHTML = currentQ.optionD;
-    // }
-    
-
     document.getElementById('answers').style.display = 'block';
+    
+    displayQuestion(0);
 
 }
 
@@ -86,7 +75,8 @@ function checkAnswer(userAnswer) {
         score--
         document.getElementById('verify').innerHTML = "Wrong! Correct answer: " + currentQ[currentQ.correct];
     }
-    console.log(currentQ.correct);
+    index++;
+    displayQuestion(index);
 }
 
 
@@ -98,7 +88,6 @@ var optionD = document.getElementById('option-d');
 
 optionA.addEventListener('click', function(event) {
     checkAnswer('optionA');
-    console.log(currentQ.correct);
 });
 optionB.addEventListener('click', function(event) {
     checkAnswer('optionB');
@@ -110,4 +99,12 @@ optionD.addEventListener('click', function(event) {
     checkAnswer('optionD');
 });
 
+function displayQuestion(index) {
+    currentQ = questions_with_answers[index];
+    h2.innerHTML = currentQ.q;
+    optionA.innerHTML = currentQ.optionA;
+    optionB.innerHTML = currentQ.optionB;
+    optionC.innerHTML = currentQ.optionC;
+    optionD.innerHTML = currentQ.optionD;
+}
 
