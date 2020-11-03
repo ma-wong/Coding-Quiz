@@ -15,42 +15,42 @@ document.getElementById('answers').style.display = 'none';
 var questions_with_answers = [
     {
         q: 'What is the best animal?',
-        optionA: 'cat',
-        optionB: 'cow',
-        optionC: 'donkey',
-        optionD: 'whale',
+        optionA: 'A. cat',
+        optionB: 'B. cow',
+        optionC: 'C. donkey',
+        optionD: 'D. whale',
         correct: 'optionB'
     },
     {
         q: 'How Stinky is my hammy?',
-        optionA: 'very',
-        optionB: 'a little bit',
-        optionC: 'not at all',
-        optionD: 'a cubic fuck ton',
+        optionA: 'A. very',
+        optionB: 'B. a little bit',
+        optionC: 'C. not at all',
+        optionD: 'D. a cubic fuck ton',
         correct: 'optionD'
     },
     {
         q: 'Which of the following is not a Javascript type?',
-        optionA: 'result',
-        optionB: 'string',
-        optionC: 'nan',
-        optionD: 'array',
+        optionA: 'A. result',
+        optionB: 'B. string',
+        optionC: 'C. nan',
+        optionD: 'D. array',
         correct: 'optionA'
     },
     {
         q: 'When is javascript?',
-        optionA: 'a',
-        optionB: 'b',
-        optionC: 'c',
-        optionD: 'd',
+        optionA: 'A.',
+        optionB: 'B.',
+        optionC: 'C.',
+        optionD: 'D.',
         correct: 'optionA'
     },
     {
         q: 'Why is javascript?',
-        optionA: 'a',
-        optionB: 'b',
-        optionC: 'c',
-        optionD: 'd',
+        optionA: 'A. ',
+        optionB: 'B. ',
+        optionC: 'C. ',
+        optionD: 'D. ',
         correct: 'optionC'
     }
 ];
@@ -88,6 +88,7 @@ var optionB = document.getElementById('option-b');
 var optionC = document.getElementById('option-c');
 var optionD = document.getElementById('option-d');
 
+// event listeners for each of the answer buttons
 optionA.addEventListener('click', function(event) {
     checkAnswer('optionA');
 });
@@ -101,7 +102,7 @@ optionD.addEventListener('click', function(event) {
     checkAnswer('optionD');
 });
 
-
+// Displays question and answers on html
 function displayQuestion(index) {
     currentQ = questions_with_answers[index];
     h2.innerHTML = currentQ.q;

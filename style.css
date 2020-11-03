@@ -1,6 +1,6 @@
 h1 {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 p {
@@ -10,5 +10,14 @@ p {
 #start-button {
     text-align: center;
     background-color: rgb(54, 189, 54);
+    align-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 80px;
+}
+
+#answers {
     align-content: center;
 }
