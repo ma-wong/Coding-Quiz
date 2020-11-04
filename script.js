@@ -4,18 +4,32 @@ var startBttn = document.getElementById('start-button');
 var h2 = document.querySelector('h2');
 var answers = document.getElementById('answers');
 var endHeader = document.getElementById('end-header');
+var highScores = document.getElementById('view-highscores');
+var timer = document.getElementById('timer');
 
-timer = 60;
+var time = 60;
 score = 0;
 index = 0;
 
+// Adding Text Content
+highScores.textContent = 'View Highscores';
+timer.textContent = "Time Remaining: " + time;
+
+// Setting attributes to my variables
+highScores.setAttribute('href', 'highscores.html');
+highScores.setAttribute('style', 'font-size:15pt;');
+
+timer.setAttribute('style', 'font-size:15pt; float:right;');
+
 startBttn.addEventListener('click', startQuiz);
 document.getElementById('answers').style.display = 'none';
+// highScores.style.display = 'block';
+// timer.style.display = 'block';
 
 // questions object is array of questions
 var questions_with_answers = [
     {
-        q: 'What is the best animal?',
+        q: 'What is the best animal?<hr>',
         optionA: 'A. cat',
         optionB: 'B. cow',
         optionC: 'C. donkey',
@@ -23,7 +37,7 @@ var questions_with_answers = [
         correct: 'optionB'
     },
     {
-        q: 'What color is the sky?',
+        q: 'What color is the sky?<hr>',
         optionA: 'A. red',
         optionB: 'B. green',
         optionC: 'C. yellow',
@@ -31,7 +45,7 @@ var questions_with_answers = [
         correct: 'optionD'
     },
     {
-        q: 'Which of the following is not a Javascript type?',
+        q: 'Which of the following is not a Javascript type?<hr>',
         optionA: 'A. result',
         optionB: 'B. string',
         optionC: 'C. nan',
@@ -39,7 +53,7 @@ var questions_with_answers = [
         correct: 'optionA'
     },
     {
-        q: 'When is javascript?',
+        q: 'When is javascript?<hr>',
         optionA: 'A.',
         optionB: 'B.',
         optionC: 'C.',
@@ -47,7 +61,7 @@ var questions_with_answers = [
         correct: 'optionA'
     },
     {
-        q: 'Why is javascript?',
+        q: 'Why is javascript?<hr>',
         optionA: 'A. ',
         optionB: 'B. ',
         optionC: 'C. ',
@@ -103,19 +117,17 @@ function checkAnswer(userAnswer) {
     if (index > 3) {
         quizFinish();
     }
-    console.log('morgan');
     if (userAnswer === currentQ.correct) {
         score++
-        document.getElementById('verify').innerHTML = "Correct!";
+        document.getElementById('verify').innerHTML = "<hr>Correct!";
     }
     else {
         score--
-        document.getElementById('verify').innerHTML = "Wrong! Correct answer: " + currentQ[currentQ.correct];
+        document.getElementById('verify').innerHTML = "<hr>Wrong! Correct answer: " + currentQ[currentQ.correct];
     }
     index++;
     displayQuestion(index);
     return;
-
 }
 
 // Display final score and input for initials
@@ -124,11 +136,24 @@ function quizFinish() {
     document.getElementById('answers').style.display = 'none';
     document.getElementById('question-prompts').style.display = 'none';
     document.getElementById('verify').style.display = 'none';
+    
     endHeader.textContent = 'All Done!';
     var finalScore = document.createElement('p');
-    finalScore.textContent = 'Your final score is ' + score;
+    finalScore.textContent = 'Your final score is: ' + score;
     endHeader.appendChild(finalScore);
-    // var userInitials = document.createElement('input');
-    // endHeader.appendChild(userInitials);
+
+    var userInput = document.createElement('input');
+    endHeader.appendChild(userInput);
+
+    var submitButton = document.createElement('button');
+    submitButton.textContent = "Submit Score";
+    endHeader.appendChild(submitButton);
+    
+    console.log(score);
+    
+    submitButton.addEventListener('click', function() {
+        var userInitials = userInput.value;
+        localStorage.setItem(userInitials, score);
+    })
 
 }
