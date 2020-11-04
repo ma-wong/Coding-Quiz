@@ -114,8 +114,10 @@ function displayQuestion(index) {
 
 // Checks Answer & logs -1 or +1 for score
 function checkAnswer(userAnswer) {
+    console.log(userAnswer);
     if (index > 3) {
         quizFinish();
+        return;
     }
     if (userAnswer === currentQ.correct) {
         score++
@@ -127,7 +129,6 @@ function checkAnswer(userAnswer) {
     }
     index++;
     displayQuestion(index);
-    return;
 }
 
 // Display final score and input for initials
