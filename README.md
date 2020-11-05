@@ -25,5 +25,5 @@ Where to click to view highscores
 ![Submission](/assets/submission-box.png)
 Submission box for user initials
 
-
+Link to Quiz page
 [Coding-Quiz](https://ma-wong.github.io/Coding-Quiz/)
