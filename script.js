@@ -13,13 +13,13 @@ index = 0;
 
 // Adding Text Content
 highScores.textContent = 'View Highscores';
-// timer.textContent = "Time Remaining: " + time;
+timer.textContent = "Time Remaining: " + secondsLeft;
 
 // Setting attributes to my variables
 highScores.setAttribute('href', 'highscores.html');
 highScores.setAttribute('style', 'font-size:15pt;');
 
-timer.setAttribute('style', 'font-size:15pt; float:right;');
+timer.setAttribute('style', 'font-size:15pt; text-align:right');
 
 startBttn.addEventListener('click', startQuiz);
 document.getElementById('answers').style.display = 'none';
@@ -27,43 +27,43 @@ document.getElementById('answers').style.display = 'none';
 // questions object is array of questions
 var questions_with_answers = [
     {
-        q: 'What is the best animal?<hr>',
-        optionA: 'A. cat',
-        optionB: 'B. cow',
-        optionC: 'C. donkey',
-        optionD: 'D. whale',
+        q: 'Do you want to meet singles in your area?<hr>',
+        optionA: 'A. no',
+        optionB: 'B. yes, but dont tell anyone',
+        optionC: 'C. maybe',
+        optionD: 'D. definitely',
         correct: 'optionB'
     },
     {
-        q: 'What color is the sky?<hr>',
-        optionA: 'A. red',
-        optionB: 'B. green',
-        optionC: 'C. yellow',
-        optionD: 'D. blue',
+        q: 'How many Indian princesses would you like to support?<hr>',
+        optionA: 'A. 1',
+        optionB: 'B. 90',
+        optionC: 'C. 300',
+        optionD: 'D. as many as my bank account will allow',
         correct: 'optionD'
     },
     {
-        q: 'Which of the following is not a Javascript type?<hr>',
-        optionA: 'A. result',
-        optionB: 'B. string',
-        optionC: 'C. nan',
-        optionD: 'D. array',
+        q: 'Who do you bank with?<hr>',
+        optionA: 'A. Wells Fargo',
+        optionB: 'B. Chase',
+        optionC: 'C. City Bank',
+        optionD: 'D. Bank of America',
         correct: 'optionA'
     },
     {
-        q: 'When is javascript?<hr>',
-        optionA: 'A.',
-        optionB: 'B.',
-        optionC: 'C.',
-        optionD: 'D.',
+        q: 'How many years of bad luck will you have if you dont complete this quiz?<hr>',
+        optionA: 'A. 8,004,000 years',
+        optionB: 'B. 10 years',
+        optionC: 'C. 257 years',
+        optionD: 'D. 39',
         correct: 'optionA'
     },
     {
-        q: 'Why is javascript?<hr>',
-        optionA: 'A. ',
-        optionB: 'B. ',
-        optionC: 'C. ',
-        optionD: 'D. ',
+        q: 'How would you like to submit your social security number?<hr>',
+        optionA: 'A. through email',
+        optionB: 'B. over the phone',
+        optionC: 'C. via carrier pigeon',
+        optionD: 'D. through text message',
         correct: 'optionC'
     }
 ];
@@ -83,6 +83,21 @@ function startQuiz() {
     displayQuestion(0);
 
 }
+
+
+// time remaining function
+function timeCountdown() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timer.textContent = "Time Remaining: " + secondsLeft;
+  
+      if(secondsLeft === 0) {
+        clearInterval(timerInterval);
+        alert("Time's up!");
+      }
+  
+    }, 1000);
+  }
 
 
 // event listeners for each of the answer buttons
@@ -137,7 +152,8 @@ function quizFinish() {
     document.getElementById('question-prompts').style.display = 'none';
     document.getElementById('verify').style.display = 'none';
     
-    endHeader.textContent = 'All Done!';
+    endHeader.textContent = "If you're reading this, it's too late.";
+    endHeader.setAttribute('style', "font-family: 'Creepster', cursive;")
     var finalScore = document.createElement('p');
     finalScore.textContent = 'Your final score is: ' + score;
     endHeader.appendChild(finalScore);
@@ -155,31 +171,19 @@ function quizFinish() {
             userInitials: userInput.value,
             score: score
         };
+        var scoreArray = [];
         if (localStorage.getItem('scoreInfo') === null) {
-            localStorage.setItem('scoreInfo', JSON.stringify(scoreInfo));
+            scoreArray.push(scoreInfo);
+            localStorage.setItem('scoreInfo', JSON.stringify(scoreArray));
         }
         else {
             var savedScores = JSON.parse(localStorage.getItem('scoreInfo'));
-            localStorage.setItem('scoreInfo', JSON.stringify(scoreInfo) + JSON.stringify(savedScores));
+            savedScores.push(scoreInfo);
+            savedScores.sort(function (a, b) {
+                b.score - a.score;
+            });
+            localStorage.setItem('scoreInfo', JSON.stringify(savedScores));
         }
     })
 
 }
-
-
-function timeCountdown() {
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timer.textContent = "Time Remaining: " + secondsLeft;
-  
-      if(secondsLeft === 0) {
-        clearInterval(timerInterval);
-        alert("Time's up!");
-      }
-  
-    }, 1000);
-  }
-
-// highScores.addEventListener('click', function() {
-//     document.getElementById('end-page').style.display = 'none';
-// })

@@ -1,16 +1,23 @@
 h1 {
     text-align: center;
     margin-top: 80px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 35pt;
 }
 
 #quiz-description {
     text-align: center;
+    font-family: 'VT323', monospace;
+    font-size: 20pt;
+
 }
 
 #start-button {
     text-align: center;
     background-color: rgb(54, 189, 54);
     align-content: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15pt;
 }
 
 h2 {
@@ -21,3 +28,4 @@ h2 {
 #answers {
     align-content: center;
 }
+
