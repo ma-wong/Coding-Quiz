@@ -6,8 +6,9 @@ var answers = document.getElementById('answers');
 var endHeader = document.getElementById('end-header');
 var highScores = document.getElementById('view-highscores');
 var timer = document.getElementById('timer');
+var money = document.getElementById('money-image');
 
-var secondsLeft = 60;
+var secondsLeft = 75;
 score = 0;
 index = 0;
 
@@ -23,6 +24,8 @@ timer.setAttribute('style', 'font-size:15pt; text-align:right');
 
 startBttn.addEventListener('click', startQuiz);
 document.getElementById('answers').style.display = 'none';
+
+money.setAttribute('src', 'https://library.kissclipart.com/20191004/ow/kissclipart-cash-money-currency-dollar-saving-f95eef4dfcc3c2cb.png');
 
 // questions object is array of questions
 var questions_with_answers = [
@@ -94,6 +97,7 @@ function timeCountdown() {
       if(secondsLeft === 0) {
         clearInterval(timerInterval);
         alert("Time's up!");
+        quizFinish();
       }
   
     }, 1000);
@@ -140,6 +144,7 @@ function checkAnswer(userAnswer) {
     else {
         score--
         document.getElementById('verify').innerHTML = "<hr>Wrong! <br>Correct answer: " + currentQ[currentQ.correct];
+        secondsLeft = secondsLeft - 10;
     }
     index++;
     displayQuestion(index);
@@ -152,19 +157,20 @@ function quizFinish() {
     document.getElementById('question-prompts').style.display = 'none';
     document.getElementById('verify').style.display = 'none';
     
-    endHeader.textContent = "If you're reading this, it's too late.";
-    endHeader.setAttribute('style', "font-family: 'Creepster', cursive;")
+    endHeader.innerHTML = "If you're reading this, <br> it's too late.";
+    endHeader.setAttribute('style', "font-family: 'Creepster', cursive; font-size:40pt");
     var finalScore = document.createElement('p');
     finalScore.textContent = 'Your final score is: ' + score;
+    finalScore.setAttribute('style', "font-family: 'Reenie Beanie', cursive");
     endHeader.appendChild(finalScore);
 
     var userInput = document.createElement('input');
     endHeader.appendChild(userInput);
+    userInput.setAttribute('placeholder', 'Your initials here');
 
     var submitButton = document.createElement('button');
     submitButton.textContent = "Submit Score";
     endHeader.appendChild(submitButton);
-    
     
     submitButton.addEventListener('click', function() {
         var scoreInfo = {
