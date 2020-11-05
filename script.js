@@ -7,13 +7,13 @@ var endHeader = document.getElementById('end-header');
 var highScores = document.getElementById('view-highscores');
 var timer = document.getElementById('timer');
 
-var time = 60;
+var secondsLeft = 60;
 score = 0;
 index = 0;
 
 // Adding Text Content
 highScores.textContent = 'View Highscores';
-timer.textContent = "Time Remaining: " + time;
+// timer.textContent = "Time Remaining: " + time;
 
 // Setting attributes to my variables
 highScores.setAttribute('href', 'highscores.html');
@@ -23,8 +23,6 @@ timer.setAttribute('style', 'font-size:15pt; float:right;');
 
 startBttn.addEventListener('click', startQuiz);
 document.getElementById('answers').style.display = 'none';
-// highScores.style.display = 'block';
-// timer.style.display = 'block';
 
 // questions object is array of questions
 var questions_with_answers = [
@@ -81,6 +79,7 @@ function startQuiz() {
     document.getElementById('start-page').style.display = 'none';
     document.getElementById('answers').style.display = 'block';
     
+    timeCountdown();
     displayQuestion(0);
 
 }
@@ -125,7 +124,7 @@ function checkAnswer(userAnswer) {
     }
     else {
         score--
-        document.getElementById('verify').innerHTML = "<hr>Wrong! Correct answer: " + currentQ[currentQ.correct];
+        document.getElementById('verify').innerHTML = "<hr>Wrong! <br>Correct answer: " + currentQ[currentQ.correct];
     }
     index++;
     displayQuestion(index);
@@ -150,11 +149,37 @@ function quizFinish() {
     submitButton.textContent = "Submit Score";
     endHeader.appendChild(submitButton);
     
-    console.log(score);
     
     submitButton.addEventListener('click', function() {
-        var userInitials = userInput.value;
-        localStorage.setItem(userInitials, score);
+        var scoreInfo = {
+            userInitials: userInput.value,
+            score: score
+        };
+        if (localStorage.getItem('scoreInfo') === null) {
+            localStorage.setItem('scoreInfo', JSON.stringify(scoreInfo));
+        }
+        else {
+            var savedScores = JSON.parse(localStorage.getItem('scoreInfo'));
+            localStorage.setItem('scoreInfo', JSON.stringify(scoreInfo) + JSON.stringify(savedScores));
+        }
     })
 
 }
+
+
+function timeCountdown() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timer.textContent = "Time Remaining: " + secondsLeft;
+  
+      if(secondsLeft === 0) {
+        clearInterval(timerInterval);
+        alert("Time's up!");
+      }
+  
+    }, 1000);
+  }
+
+// highScores.addEventListener('click', function() {
+//     document.getElementById('end-page').style.display = 'none';
+// })
